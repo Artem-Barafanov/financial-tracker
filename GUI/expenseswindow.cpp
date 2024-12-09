@@ -1,5 +1,6 @@
 #include "expenseswindow.h"
 #include "mainappwindow.h" // Добавляем заголовок для MainAppWindow
+#include "TextField.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -27,10 +28,9 @@ void ExpensesWindow::setupUI()
     // Создаем главный вертикальный layout
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
 
-    // Создаем QLineEdit для ввода суммы расходов
-    amountEdit = new QLineEdit(this);
+    // Создаем TextField для ввода суммы расходов
+    TextField *amountEdit = new TextField(this);
     amountEdit->setPlaceholderText("Сумма расходов");
-    amountEdit->setStyleSheet("QLineEdit { border: 2px solid #C8D3D5; border-radius: 15px; padding: 6px; background-color: white; selection-background-color: darkgray; min-width: 250px; min-height: 40px; font-size: 16px; }");
     mainLayout->addWidget(amountEdit, 0, Qt::AlignCenter);
 
     // Создаем QLabel для надписи "Категории"
@@ -68,14 +68,10 @@ void ExpensesWindow::setupUI()
 
     // Создаем горизонтальный layout для ввода даты
     QHBoxLayout *dateLayout = new QHBoxLayout;
-    dayEdit = new QLineEdit(this);
+    TextField *dayEdit = new TextField(this);
     dayEdit->setPlaceholderText("День");
-    monthEdit = new QLineEdit(this);
+    TextField *monthEdit = new TextField(this);
     monthEdit->setPlaceholderText("Месяц");
-
-    QString dateEditStyle = "QLineEdit { border: 2px solid #C8D3D5; border-radius: 15px; padding: 6px; background-color: white; selection-background-color: darkgray; min-width: 100px; min-height: 40px; font-size: 16px; }";
-    dayEdit->setStyleSheet(dateEditStyle);
-    monthEdit->setStyleSheet(dateEditStyle);
 
     dateLayout->addWidget(dateLabel);
     dateLayout->addWidget(dayEdit);

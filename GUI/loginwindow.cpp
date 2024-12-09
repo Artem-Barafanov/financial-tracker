@@ -2,6 +2,7 @@
 
 #include "loginwindow.h"
 #include "mainappwindow.h" // Добавляем заголовок для MainAppWindow
+#include "TextField.h"
 #include "data_base.h"
 #include <QMessageBox>
 
@@ -26,9 +27,8 @@ LoginWindow::LoginWindow(QWidget *parent) : QWidget(parent)
     loginLabel->setStyleSheet("color: black; background-color: #FCFAFA;");
     loginMainLayout->addWidget(loginLabel);
 
-    // Создаем QLineEdit для ввода логина
-    loginEdit = new QLineEdit(this);
-    loginEdit->setStyleSheet("QLineEdit { border: 2px solid #C8D3D5; border-radius: 20px; padding: 8px; background-color: white; selection-background-color: darkgray; min-width: 150px; min-height: 35px; font-size: 16px; }");
+    // Создаем TextField для ввода логина
+    TextField *loginEdit = new TextField(this);
     loginMainLayout->addWidget(loginEdit);
 
     // Создаем QLabel для надписи "Пароль"
@@ -38,10 +38,9 @@ LoginWindow::LoginWindow(QWidget *parent) : QWidget(parent)
     passwordLabel->setStyleSheet("color: black; background-color: #FCFAFA;");
     loginMainLayout->addWidget(passwordLabel);
 
-    // Создаем QLineEdit для ввода пароля
-    passwordEdit = new QLineEdit(this);
+    // Создаем TextField для ввода пароля
+    TextField *passwordEdit = new TextField(this);
     passwordEdit->setEchoMode(QLineEdit::Password); // Скрываем вводимый пароль
-    passwordEdit->setStyleSheet("QLineEdit { border: 2px solid #C8D3D5; border-radius: 20px; padding: 8px; background-color: white; selection-background-color: darkgray; min-width: 150px; min-height: 35px; font-size: 16px; }");
     loginMainLayout->addWidget(passwordEdit);
 
     // Создаем кнопку "Показать пароль"

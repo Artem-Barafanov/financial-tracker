@@ -2,6 +2,7 @@
 
 #include "registrationform.h"
 #include "loginwindow.h" // Добавляем заголовок для LoginWindow
+#include "TextField.h"
 #include "data_base.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -51,37 +52,21 @@ RegistrationForm::RegistrationForm(QWidget *parent)
     usernameLabel->setStyleSheet("color: black; background-color: #FCFAFA;");
     passwordLabel->setStyleSheet("color: black; background-color: #FCFAFA;");
 
-    // Создаем QLineEdit для ввода данных
-    firstNameEdit = new QLineEdit(this);
-    lastNameEdit = new QLineEdit(this);
-    phoneNumberEdit = new QLineEdit(this);
-    emailEdit = new QLineEdit(this);
-    usernameEdit = new QLineEdit(this);
-    passwordEdit = new QLineEdit(this);
+    // Создаем TextField для ввода данных
+    TextField *firstNameEdit = new TextField(this);
+    TextField *lastNameEdit = new TextField(this);
+    TextField *phoneNumberEdit = new TextField(this);
+    TextField *emailEdit = new TextField(this);
+    TextField *usernameEdit = new TextField(this);
+    TextField *passwordEdit = new TextField(this);
     passwordEdit->setEchoMode(QLineEdit::Normal); // Устанавливаем режим отображения пароля
 
-    dayEdit = new QLineEdit(this);
+    TextField *dayEdit = new TextField(this);
     dayEdit->setPlaceholderText("День");
-    QString dateEditStyle = "QLineEdit { border: 2px solid #C8D3D5; border-radius: 17px; padding: 6px; background-color: white; selection-background-color: darkgray; min-width: 57px; min-height: 30px; font-size: 14px; }";
-    monthEdit = new QLineEdit(this);
+    TextField *monthEdit = new TextField(this);
     monthEdit->setPlaceholderText("Месяц");
-    yearEdit = new QLineEdit(this);
+    TextField *yearEdit = new TextField(this);
     yearEdit->setPlaceholderText("Год");
-
-    // Устанавливаем стили для QLineEdit
-    QString lineEditStyle = "QLineEdit { border: 2px solid #C8D3D5; border-radius: 15px; padding: 6px; background-color: white; selection-background-color: darkgray; min-width: 120px; min-height: 30px; font-size: 14px; }";
-    firstNameEdit->setStyleSheet(lineEditStyle);
-    lastNameEdit->setStyleSheet(lineEditStyle);
-    phoneNumberEdit->setStyleSheet(lineEditStyle);
-    emailEdit->setStyleSheet(lineEditStyle);
-    usernameEdit->setStyleSheet(lineEditStyle);
-    passwordEdit->setStyleSheet(lineEditStyle);
-    //dayEdit->setStyleSheet(lineEditStyle);
-    //monthEdit->setStyleSheet(lineEditStyle);
-    //yearEdit->setStyleSheet(lineEditStyle);
-    dayEdit->setStyleSheet(dateEditStyle);
-    monthEdit->setStyleSheet(dateEditStyle);
-    yearEdit->setStyleSheet(dateEditStyle);
 
     // Создаем кнопку "Зарегистрироваться"
     registerButton = new QPushButton("Зарегистрироваться", this);
