@@ -120,19 +120,24 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::onLoginButtonClicked() {
-    // Обработка нажатия кнопки "Вход"
     hide();
     if (!loginWindow) {
-        loginWindow = new LoginWindow(); // Создаем новое окно без родителя
+        loginWindow = new LoginWindow();
+        connect(loginWindow, &LoginWindow::cancelRequested, this, &MainWindow::showMainWindow); // Подключаем сигнал
     }
     loginWindow->show();
 }
 
 void MainWindow::onRegisterButtonClicked() {
-    // Обработка нажатия кнопки "Регистрация"
     hide();
     if (!registrationWindow) {
-        registrationWindow = new RegistrationForm(); // Создаем новое окно без родителя
+        registrationWindow = new RegistrationForm();
+        connect(registrationWindow, &RegistrationForm::cancelRequested, this, &MainWindow::show); // Подключаем сигнал
     }
     registrationWindow->show();
 }
+
+void MainWindow::showMainWindow() {
+    this->show(); // Показываем MainWindow
+}
+

@@ -59,6 +59,9 @@ LoginWindow::LoginWindow(QWidget *parent) : QWidget(parent)
     connect(showPasswordButton, &QPushButton::clicked, this, &LoginWindow::onShowPasswordButtonClicked);
     loginMainLayout->addWidget(showPasswordButton);
 
+    // Создание горизонтального layout для кнопок "Войти" и "Отмена"
+    QHBoxLayout *buttonLayout = new QHBoxLayout();
+
     // Создаем кнопку "Войти"
     loginButton = new QPushButton("Войти", this);
     loginButton->setFixedSize(150, 40);
@@ -72,6 +75,23 @@ LoginWindow::LoginWindow(QWidget *parent) : QWidget(parent)
                                "QPushButton:hover {"
                                "background-color: #8E9EAB;"
                                "}");
+    buttonLayout->addWidget(loginButton, 0, Qt::AlignLeft);
+
+    // Создание кнопки "Отмена"
+    QPushButton *cancelButton = new QPushButton("Отмена", this);
+    cancelButton->setFixedSize(100, 40);
+    cancelButton->setStyleSheet("QPushButton {"
+                                "background-color: #A4B8C4;"
+                                "color: white;"
+                                "font-size: 16px;"
+                                "border-radius: 20px;"
+                                "border: 2px solid #8E9EAB;"
+                                "}"
+                                "QPushButton:hover {"
+                                "background-color: #8E9EAB;"
+                                "}");
+    buttonLayout->addWidget(cancelButton, 0, Qt::AlignRight);
+    connect(cancelButton, &QPushButton::clicked, this, &LoginWindow::onCancelButtonClicked);
 
     // Добавляем тень к кнопке
     QGraphicsDropShadowEffect *shadowEffect = new QGraphicsDropShadowEffect(this);
@@ -89,6 +109,7 @@ LoginWindow::LoginWindow(QWidget *parent) : QWidget(parent)
     successLabel->setStyleSheet("color: green; background-color: #FCFAFA;");
     successLabel->hide(); // Скрываем метку до нажатия кнопки "Войти"
     loginMainLayout->addWidget(successLabel);
+    loginMainLayout->addLayout(buttonLayout);
 
     // Устанавливаем отступы и интервалы
     loginMainLayout->setContentsMargins(50, 50, 50, 50);
@@ -136,4 +157,9 @@ void LoginWindow::onShowPasswordButtonClicked() {
         passwordEdit->setEchoMode(QLineEdit::Password);
         showPasswordButton->setText("Показать пароль");
     }
+}
+
+void LoginWindow::onCancelButtonClicked() {
+    emit cancelRequested(); // Отправка сигнала
+    this->close(); // Закрытие текущего окна
 }

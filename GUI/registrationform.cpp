@@ -68,19 +68,39 @@ RegistrationForm::RegistrationForm(QWidget *parent)
     TextField *yearEdit = new TextField(this);
     yearEdit->setPlaceholderText("Год");
 
+    // Создание горизонтального layout для кнопок "Зарегистрироваться" и "Отмена"
+    QHBoxLayout *buttonLayout = new QHBoxLayout();
+
     // Создаем кнопку "Зарегистрироваться"
-    registerButton = new QPushButton("Зарегистрироваться", this);
-    registerButton->setFixedSize(200, 35); // Увеличиваем ширину кнопки
+    QPushButton *registerButton = new QPushButton("Зарегистрироваться", this);
+    registerButton->setFixedSize(200, 35);
     registerButton->setStyleSheet("QPushButton {"
                                   "background-color: #A4B8C4;"
                                   "color: white;"
-                                  "font-size: 16px;" // Уменьшаем размер шрифта
-                                  "border-radius: 15px;" // Уменьшаем радиус закругления
+                                  "font-size: 16px;"
+                                  "border-radius: 15px;"
                                   "border: 2px solid #8E9EAB;"
                                   "}"
                                   "QPushButton:hover {"
                                   "background-color: #8E9EAB;"
                                   "}");
+    buttonLayout->addWidget(registerButton, 0, Qt::AlignLeft);
+
+    // Создание кнопки "Отмена"
+    QPushButton *cancelButton = new QPushButton("Отмена", this);
+    cancelButton->setFixedSize(100, 35);
+    cancelButton->setStyleSheet("QPushButton {"
+                                "background-color: #A4B8C4;"
+                                "color: white;"
+                                "font-size: 16px;"
+                                "border-radius: 15px;"
+                                "border: 2px solid #8E9EAB;"
+                                "}"
+                                "QPushButton:hover {"
+                                "background-color: #8E9EAB;"
+                                "}");
+    buttonLayout->addWidget(cancelButton, 0, Qt::AlignRight);
+    connect(cancelButton, &QPushButton::clicked, this, &RegistrationForm::onCancelButtonClicked);
 
     // Добавляем тень к кнопке
     QGraphicsDropShadowEffect *shadowEffect = new QGraphicsDropShadowEffect(this);
@@ -125,9 +145,10 @@ RegistrationForm::RegistrationForm(QWidget *parent)
     mainLayout->addWidget(usernameEdit);
     mainLayout->addWidget(passwordLabel);
     mainLayout->addWidget(passwordEdit);
-    //mainLayout->addWidget(passwordButtonSeparator); // Добавляем разделитель
+    mainLayout->addWidget(passwordButtonSeparator); // Добавляем разделитель
     mainLayout->addWidget(registerButton, 0, Qt::AlignCenter);
     mainLayout->addWidget(statusLabel);
+    mainLayout->addLayout(buttonLayout);
 
     // Устанавливаем отступы и интервалы
     mainLayout->setContentsMargins(30, 30, 30, 30); // Уменьшаем отступы
@@ -188,4 +209,9 @@ void RegistrationForm::onRegisterClicked()
         // Закрываем текущее окно регистрации
         this->close();
     }
+}
+
+void RegistrationForm::onCancelButtonClicked() {
+    emit cancelRequested(); // Отправка сигнала
+    this->close(); // Закрытие текущего окна
 }

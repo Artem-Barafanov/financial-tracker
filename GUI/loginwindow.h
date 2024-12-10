@@ -16,9 +16,13 @@ class LoginWindow : public QWidget
 public:
     explicit LoginWindow(QWidget *parent = nullptr);
 
+signals:
+    void cancelRequested(); // Сигнал для уведомления MainWindow
+
 private slots:
     void onLoginButtonClicked();
     void onShowPasswordButtonClicked();
+    void onCancelButtonClicked(); // Слот для кнопки "Отмена"
 
 private:
     QLabel *loginLabel;

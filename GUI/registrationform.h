@@ -13,8 +13,12 @@ class RegistrationForm : public QWidget
 public:
     RegistrationForm(QWidget *parent = nullptr);
 
+signals:
+    void cancelRequested(); // Сигнал для уведомления MainWindow
+
 private slots:
     void onRegisterClicked();
+    void onCancelButtonClicked(); // Слот для кнопки "Отмена"
 
 private:
     QLineEdit *firstNameEdit;

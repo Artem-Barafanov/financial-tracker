@@ -20,6 +20,7 @@ public:
 private slots:
     void onLoginButtonClicked();
     void onRegisterButtonClicked();
+    void showMainWindow(); // Слот для отображения MainWindow
 
 private:
     Ui::MainWindow *ui;
