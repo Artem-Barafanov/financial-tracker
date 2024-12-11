@@ -6,9 +6,9 @@ CONFIG += c++17
 QT += core sql
 
 # MySQL libraries for linking
-# LIBS += -L/usr/lib/mysql -lmysqlclient
-LIBS += "-LC:/Program Files/MySQL/MySQL Server 8.0/lib" -lmysqlclient
-INCLUDEPATH += "C:/Program Files/MySQL/MySQL Server 8.0/include"
+LIBS += -L/usr/lib/mysql -lmysqlclient
+# LIBS += "-LC:/Program Files/MySQL/MySQL Server 9.1/lib" -lmysqlclient
+# INCLUDEPATH += "C:/Program Files/MySQL/MySQL Server 9.1/include"
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
